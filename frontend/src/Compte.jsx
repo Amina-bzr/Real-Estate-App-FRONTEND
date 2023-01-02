@@ -5,11 +5,34 @@ import avatar from "./assets/avatar.jpg";
 import account from "./assets/compte.png"
 import { useCallback,useEffect, useRef } from 'react';
 import Nav from './Navbar';
+import {useFormik} from 'formik';
 
 
 
 function Compte(){
+    
+    const formik = useFormik({
+        initialValues: {
+          nom: "",
+          prenom: "",
+          email: "",
+          tlf: "",
+          adresse:"", 
+          
+        },
+        onSubmit: (values) => {
+            
+            console.log("form submitted");
+            console.log(values);
+           const jason=JSON.stringify(values);
+            console.log(file);
+           
+          },
+    })
+    
+   
     const [file, setFile] = useState();
+    
     
     function handleChange(e) {
         console.log(e.target.files);
@@ -47,7 +70,7 @@ function Compte(){
     </div>
     <div className='text'>
     <h1>Nom Prenom</h1>
-    <h3>description</h3>
+    
     </div>
 
     </div>
@@ -56,20 +79,25 @@ function Compte(){
     <div className='formulaire'>
     <label >Nom</label>
     <label >Prénom</label>
-    <input type="text" placeholder='   Nom' id="nom" />
+    <input type="text" placeholder='   Nom' id="nom" onChange={formik.handleChange}
+                  value={formik.values.nom} />
     
-    <input type="text" placeholder='   Prenom'/>
+    <input type="text" placeholder='   Prenom' id="prenom" onChange={formik.handleChange}
+                  value={formik.values.prenom} />
     <label >Adress Email</label>
     <label >Téléphone</label>
-    <input type="text" placeholder='   @ email' />
-    <input type="text"  placeholder='     0556789321'/>
+    <input type="text" placeholder='   @ email' id="email" onChange={formik.handleChange}
+                  value={formik.values.email}/>
+    <input type="text"  placeholder='     0556789321' id="tlf" onChange={formik.handleChange}
+                  value={formik.values.tlf} />
     <label >Adress</label>
-    <label >Description</label>
-    <input type="text"  placeholder='     Alger-OuedSmar'/>
-    <input type="text"  placeholder='     profession'/>
+    <label id="description" >Description</label>
+    <input type="text"  placeholder='     Alger-OuedSmar' id="adresse" onChange={formik.handleChange}
+                  value={formik.values.adresse} />
+    <input type="text"  placeholder='     profession' id="description"/>
      
     </div>
-    <button id="valider">Valider</button>
+    <button id="valider" type="submit" onClick={formik.handleSubmit} >Valider</button>
     </div>
    
    </div>

@@ -44,13 +44,14 @@
   
     position: absolute;
     width: 35%;
-    margin-top:7%;
+    margin-top:8%;
+    margin-left: 9%;
 }
 .text{
     display: inline;
-   
     margin-left: 20%;
     padding-left: 5%;
+    padding-top: 5%;
     margin-top: 0%;
     width: 40%;
     font-family: poppins;
@@ -69,6 +70,9 @@
   top:60%;
   left: 30%;
     
+}
+#description {
+    opacity: 0;
 }
 .formulaire{
     margin: 2%;
