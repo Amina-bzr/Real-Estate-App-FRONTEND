@@ -4,7 +4,8 @@
  
     align-items:center;
     display: flex;
-    justify-content: center;
+    justify-content:flex-start;
+    padding-top: 4%;
     flex-direction: column;
     background-color:#F8F6F6; 
     width: 23%;
