@@ -6,7 +6,7 @@ import Details from './Details';
 import Messages from "./Messages";
 import Compte from "./Compte";
 import { Route, Link  } from "react-router-dom";
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter as Router } from "react-router-dom";
 function App (){
     return (
