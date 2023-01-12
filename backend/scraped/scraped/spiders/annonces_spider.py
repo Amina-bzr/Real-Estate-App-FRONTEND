@@ -1,4 +1,5 @@
 import scrapy
+import vars
 from scraped.items import AnnonceItem
 # we only scrape the vente and echange categories
 
@@ -18,7 +19,8 @@ class LoginSpider(scrapy.Spider):
     def parse(self, response):
         return scrapy.FormRequest.from_response(
             response,
-            formdata={'username': 'Amina', 'password': 'mamamamia200313'},
+            formdata={'username': vars.admin_username,
+                      'password': vars.admin_pwd},
             callback=self.after_login,
         )
 
@@ -31,7 +33,7 @@ class LoginSpider(scrapy.Spider):
         # post to /annonces
         return [FormRequest(url="http://127.0.0.1:8000/annonces",
                             formdata={'categorie': 'Vente', 'type': 'Villa', 'surface': '1', 'prix': '100000',
-                                      'description': 'scrapy came to u', 'wilaya': 'alger', 'commune': 'hydra', 'addresse': 'hydra'},
+                                      'description': 'scrapy is sworking', 'wilaya': 'alger', 'commune': 'hydra', 'addresse': 'hydra'},
                             )]
 
 
