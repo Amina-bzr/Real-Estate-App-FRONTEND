@@ -78,6 +78,7 @@ def Annonce_list(request):
         return get_objects(request, AnnonceSerializer, Annonce)
 
     elif request.method == 'POST':
+        request.POST['annonceur'] = request.user
         return post_object(request, AnnonceSerializer)
 
 

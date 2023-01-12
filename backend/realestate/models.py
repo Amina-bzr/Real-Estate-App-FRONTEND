@@ -26,9 +26,9 @@ class Annonce(models.Model):
     type = models.CharField(max_length=30)
     surface = models.FloatField(max_length=30)
     description = models.TextField()
-    prix = models.FloatField(max_length=30)
+    prix = models.CharField(max_length=30)
     annonceur = models.ForeignKey(
-        User, on_delete=models.CASCADE)  # on tire d'ici le contact
+        User, on_delete=models.CASCADE,)  # on tire d'ici le contact
     wilaya = models.CharField(max_length=25)
     commune = models.CharField(max_length=25)
     addresse = models.CharField(max_length=40)
@@ -40,7 +40,7 @@ class Annonce(models.Model):
 
 class Photo(models.Model):  # table qui contient touttes les photos
     annonce = models.ForeignKey(
-        Annonce, on_delete=models.CASCADE, related_name='photos')
+        Annonce, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='annonces/')
 
 
