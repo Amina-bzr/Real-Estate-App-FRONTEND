@@ -37,6 +37,7 @@ function Compte(){
     function handleChange(e) {
         console.log(e.target.files);
         setFile(URL.createObjectURL(e.target.files[0]));
+        
     }
     return (
    <div className="Compte">
@@ -69,7 +70,7 @@ function Compte(){
     
     </div>
     <div className='text'>
-    <h1>Nom Prenom</h1>
+    <h2>Nom Prenom</h2>
     
     </div>
 

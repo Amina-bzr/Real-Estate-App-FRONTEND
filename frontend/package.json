@@ -13,6 +13,7 @@
     "antd": "^5.1.2",
     "aos": "^2.3.4",
     "bootstrap": "^5.2.3",
+    "faker": "^6.6.6",
     "formik": "^2.2.9",
     "framer-motion": "^8.0.2",
     "jwt-decode": "^3.1.2",

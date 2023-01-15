@@ -48,14 +48,14 @@
     margin-left: 9%;
 }
 .text{
-    display: inline;
+    display: block;
     margin-left: 20%;
     padding-left: 5%;
-    padding-top: 5%;
+    padding-top: 2%;
     margin-top: 0%;
-    width: 40%;
+    width: 90%;
     font-family: poppins;
-    font-size: x-small;
+    
     line-height: 70%;
 }
 #lfile{

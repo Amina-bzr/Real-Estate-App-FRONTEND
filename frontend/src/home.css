@@ -9,6 +9,120 @@
     height: 100%;
     overflow-x: hidden;
 }
+
+.nd_part{
+    position: absolute;
+    width: 100%;
+    
+    background-color:  #F8F6F6;
+    margin-top: 10%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    padding-top: 1%;
+    padding-bottom: 10%;
+}
+#pubimg{
+    width: 100%;
+    height: 100%;
+}
+.Product{
+display: flex;
+font-family: Poppins;
+flex-direction: column;
+align-items: center;
+align-content: center;
+background-color: white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+border-radius: 30px;
+margin-left:6%;
+margin-right: 4%;
+margin-bottom: 0%;
+padding-top: 1%;
+line-height: 0%;
+max-height: 80%;
+
+}
+.det{
+   
+    width: 90%;
+    display: flex;
+    
+}
+.det h2{
+
+   margin-right: 30%;
+}
+.det button{
+    width:40%;
+    color: #F8F6F6;
+    background-color: #081C59;
+    font-family: Poppins;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 30px;
+
+}
+
+
+#modele{
+    margin-top: 2%;
+    width:90%;
+    height: 55%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.Wilaya{
+   
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    margin-left: 7%;
+    
+}
+.Type{
+   
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    margin-left: 28%;
+    
+}
+.Categorie{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    margin-left: 48%;
+}
+.Categorie select{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;
+}
+.Type select{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;
+}
+.Wilaya input{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;
+    
+    
+}
+.Wilaya select{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;  
+}
 .homebody{
     display: flex;
     flex-direction: column;
@@ -39,6 +153,8 @@
     height: 50px;
     border: 0ch;
     border-radius: 30px;
+    font-family: Poppins;
+    font-style: italic;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     left: 34%;
     top: 50%;

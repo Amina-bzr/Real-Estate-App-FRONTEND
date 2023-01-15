@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Details from './Details';
 import Messages from "./Messages";
 import Compte from "./Compte";
+import Publier from "./Publier";
 import {BrowserRouter , createBrowserRouter, RouterProvider,Route} from "react-router-dom";
 const router=createBrowserRouter([
 {
@@ -33,6 +34,11 @@ const router=createBrowserRouter([
   path: "/compte",
   element: <Compte/>,
 },
+{
+  path: "/publier",
+  element: <Publier/>,
+},
+
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
