@@ -8,12 +8,12 @@ function Navbar (){
     return (
    <div className="Navbar">
     <img src={logo} alt="logo" id="logo"/>
-   <button><AiOutlineUser/> Compte</button>
-   <button><AiTwotoneNotification/>Mes Annonces</button>
-   <button><AiFillHome/> Acceuil</button>
-   <button><AiTwotoneEdit/>Publier</button>
-   <button><AiFillAliwangwang/>Messages</button>
-   <button><AiTwotoneLock/>Deconnection</button>
+    <button><AiFillHome/> Acceuil</button>
+    <button><AiOutlineUser/> Compte</button>
+    <button><AiTwotoneNotification/> Mes Annonces</button>
+    <button><AiTwotoneEdit/> Publier</button>
+    <button><AiFillAliwangwang/> Messages</button>
+    <button><AiTwotoneLock/> Déconnection</button>
    </div>
 
 

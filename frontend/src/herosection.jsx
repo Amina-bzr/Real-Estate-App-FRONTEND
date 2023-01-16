@@ -57,7 +57,7 @@ useEffect(()=>{
       <div className="navhero">
       <img src={logohero} alt="logohero" id="logohero"/>
         <ul>
-        <li><a href="#">Contacte</a></li>
+        <li><a href="#">Contact</a></li>
         <li><a href="#">A Propos</a></li>
         <li><div  id="googlesign" style={{width:"10%" ,display:"inline"}}> Sign in </div></li>
        </ul>

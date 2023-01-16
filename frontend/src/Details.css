@@ -1,0 +1,122 @@
+.Details{
+    display: flex;
+    background-color: #F8F6F6;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    position: fixed;
+}
+
+.detailsBody{
+    margin-left: 22%;
+    display:flex;
+    width: 100%;
+    height: 100%;
+}
+
+.detailsSection{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    width:100%;
+    font-family: Poppins;
+}
+
+.topDetailsSection{
+    display:flex;
+    gap:10%;
+    justify-content:center;
+}
+
+.bottomDetailsSection{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Description{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.gallerySection{
+    display:flex;
+    flex-direction: column;
+    width:50%;
+    gap:5%;
+}
+
+.mainImage{
+    display: flex;
+    justify-content:center;
+}
+
+.imageSelector{
+    display:flex;
+    gap:10px;
+    justify-content: center;
+    padding:2%;
+}
+
+#envoyerMessage{
+    margin-top: 4%;
+    border-radius: 17px;
+    border: none;
+    color:white;
+    cursor: pointer;
+    background-color: #081C59;
+    font-family: Poppins;
+    font-weight: bold;
+    width:100%;
+    height:50px;
+}
+
+.AIinfoSection{
+    align-items: center;
+    display:flex;
+    flex-direction:column;
+}
+
+.ownerInfoSection{
+    display:flex;
+    justify-content: center;
+    align-content: flex-start;
+    width:80%;
+    gap:20%;
+    
+}
+
+.mapSection{
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+}
+
+.miniature{
+    border-radius: 15%;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+.miniatureHolder{
+    border-radius: 18%;
+    background-color: black;
+}
+
+.miniature:hover{
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.largephoto{
+  border-radius: 15%;
+  width:100%;
+}
+
+.topBar{
+    height: 8%;
+}
