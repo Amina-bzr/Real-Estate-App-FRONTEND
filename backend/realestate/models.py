@@ -35,8 +35,8 @@ class Annonce(models.Model):
     Prix = models.FloatField(max_length=30)
     utilisateur = models.ForeignKey(
         User, on_delete=models.CASCADE,)  # on tire d'ici le contact
-    Wilaya = models.CharField(max_length=25, default="tizi")
-    Commune = models.CharField(max_length=25, default="tizi")
+    Wilaya = models.CharField(max_length=25, default="Alger")
+    Commune = models.CharField(max_length=25, default="Alger")
     Addresse = models.CharField(max_length=40)
     date_pub = models.DateField(auto_now_add=True)
 
@@ -44,7 +44,7 @@ class Annonce(models.Model):
         ordering = ['-date_pub']
 
 
-class Photo(models.Model):  # table qui contient touttes les photos
+class Photo(models.Model):  
     annonce = models.ForeignKey(
         Annonce, on_delete=models.CASCADE, related_name="photos")
     photo = models.ImageField(upload_to='annonces/', editable=True)
@@ -59,7 +59,7 @@ class Offre(models.Model):
 
 
 class Contact(models.Model):
-    # Email, prenom et nom sont dans "utilisateur"
+    picture = models.ImageField(upload_to='userPhotos/', editable=True, null=True)
     utilisateur = models.OneToOneField(
         User, on_delete=models.CASCADE)
     addresse = models.CharField(max_length=50)
