@@ -4,24 +4,54 @@ import acceuil from './assets/Acceuil.png';
 import bar from './assets/bar.png';
 import result from './assets/result.png';
 import modele from './assets/Modele.jpg';
+import axios from 'axios';
 import { useCallback,useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Navbar';
+import anonces from './annonce.json';
 function Home (){
+   const [dataannonce,setdata]=useState([]);
+   const[searchkey,setsearchkey]=useState("");
+   const [wilayafiltre,setwilaya]=useState("");
+   const [communefiltre,setcommune]=useState("");
+   const [typefiltre,settype]=useState("");
+   const[date1,setdate1]=useState("");
+   const[date2,setdate2]=useState("");
     let navigate = useNavigate(); 
     function todetails (){ 
       let path = '/details'; 
       navigate(path);
     }
+   function  handlekeydown(event){
+      if (event.key === 'Enter') {
+         // call the function you want to execute here
+         console.log(searchkey);
+
+       }
+    }
+    function seechanges(){
+      console.log(dataannonce);
+    }
+   function filtrewilaya(wilaya){
+     axios.get("127.0.0.1:8000/?Wilaya=",wilaya)
+     .then(response=>{
+      console.log(response.data)
+     })
+     .catch(error=>{
+      console.log(error);
+     });
+   }
+    
     return (
    <div className="Home">
+
     <Nav/>
     <div className='homebody'>
     <img src={acceuil} alt="acceuil" id="acceuil" className="acceuil"/>
-    <input type="text" id="recherche" placeholder='       Rechercher'/>
+    <input type="text" id="recherche" placeholder='       Rechercher' onChange={(e)=>{setsearchkey(e.target.value)}} onKeyDown={handlekeydown} />
     <img src={bar} alt="bar" id="bar" className="bar"/>
     
-    <div className='Wilaya'>
+    <div className='Wilaya' onchange={(e)=>{filtrewilaya(e.target.value)}}>
     <select>
         <option>Adrar</option>
         <option> Chlef</option>
@@ -82,9 +112,9 @@ function Home (){
         <option>El M’Ghaier</option>
         <option>El Meniaa</option>
     </select>
-    <input type="text" placeholder='La commune'/>
+    <input type="text" placeholder='La commune' onchange={(e)=>{setcommune(e.target.value)}}/>
     </div>
-    <div className='Type'>
+    <div className='Type' onchange={(e)=>{settype(e.target.value)}}>
        <select>
         <option>Terrain</option>
         <option>Terrain Agricole</option>
@@ -95,34 +125,36 @@ function Home (){
        </select>
     </div>
     <div className='Categorie'>
-       <select>
-        <option>Vente</option>
-        <option>Echange</option>
-        <option>Location</option>
-        <option>Location pour vacance</option>
-        <option>Autre</option>
-       </select>
+    <input type="date" placeholder='date1' onchange={(e)=>{setdate1(e.target.value)}}/>
+    <input type="date" placeholder='date2' onchange={(e)=>{setdate2(e.target.value)}}/>
     </div>
-    
+   
+   
+
     <div className='shopcard'>
     <img src={result} alt="result" id="result" className="result"/>
-
     <div className='nd_part'>
-        <div className='Product'>
-        <img src={modele} alt="modele" id="modele" className="modele"/>
-          <h2>Maison</h2>
-          <h4>Alger</h4>
-          <div className='det'>
-             <h2>Le Prix</h2>
-             <button onClick={todetails} >Details</button>
-             </div>
-         
-        </div>
-        
-
-    </div>
+    { 
+   anonces.map(card =>(
+    
+      
+      <div className='Product'>
+      <img src={modele} alt="modele" id="modele" className="modele"/>
+        <h2>{card.titre}</h2>
+        <h4>{card.Wilaya}</h4>
+        <div className='det'>
+           <h2>{card.Prix}</h2>
+           <button onClick={todetails} >Details</button>
+           </div>
+       
+      </div>
+  
+  
+   ))}
+   </div>
        
     </div>
+  
     </div>
     
    </div>

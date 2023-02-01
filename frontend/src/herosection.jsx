@@ -3,6 +3,8 @@ import './App.css';
 import React, { useState } from 'react';
 import { useCallback,useEffect, useRef } from 'react';
 import back from './assets/back.jpg';
+import axios from 'axios';
+import {useNavigate, useNavigation} from 'react-router-dom';
 import herbe from './assets/herbe.png';
 import cozy from './assets/cosyback-01.jpg';
 import group from './assets/Group 2.png';
@@ -14,7 +16,7 @@ import logohero from './assets/logohero.png';
 import AOS from 'aos';
 import jwt_decode from "jwt-decode";
 
-import {motion as m } from "framer-motion";
+import {motion as m, resolveMotionValue } from "framer-motion";
 import { AiFillGoogleCircle } from 'react-icons/ai';
 
 
@@ -28,13 +30,48 @@ useEffect(()=>{
   return ()=>window.removeEventListener("scroll",handlescroll);
 
 },[]);
- function HandleCalback(response){
-  console.log( response.credential);
-  var userObject= jwt_decode(response.credential);
-  console.log(userObject);
- };
+let navigate = useNavigate(); 
+const Routerchange=(user) =>{ 
+  let path = '/Compte';
+  navigate(path,{
+    state: {
+      useremail: user,
+    }
+  });
+}
+const[token,settoken]=useState("");
 useEffect(()=>{
-  /*global google*/
+  axios.post('http://annoncesimmobilieres.pythonanywhere.com/token-auth/')
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+},[]);
+
+ function HandleCalback(response){
+  
+  var userObject= jwt_decode(response.credential);
+  console.log(userObject.email);
+
+  let url='https://annoncesimmobilieres.pythonanywhere.com/users/';
+  /*fetch(url,{
+    method:'POST',
+    headers:{
+      'Content-type':'application/json',
+     
+    },
+    body:JSON.stringify(userObject)
+  }).then((response)=>{
+    console.log(response);
+  })*/
+  Routerchange(userObject.email);
+ };
+
+ useEffect(()=>{
+
   google.accounts.id.initialize({
     client_id:"249363103992-2dcdos5okgn4papgansm0u0jl4i0mrg2.apps.googleusercontent.com",
     callback:HandleCalback
@@ -57,8 +94,8 @@ useEffect(()=>{
       <div className="navhero">
       <img src={logohero} alt="logohero" id="logohero"/>
         <ul>
-        <li><a href="#">Contacte</a></li>
-        <li><a href="#">A Propos</a></li>
+        <li><a href="#contactus">Contacte</a></li>
+        <li><a href="#apropos">A Propos</a></li>
         <li><div  id="googlesign" style={{width:"10%" ,display:"inline"}}> Sign in </div></li>
        </ul>
         
@@ -83,24 +120,39 @@ useEffect(()=>{
       <img src={group} alt="group" id="group" className ="group" style={{transform: `translateY(${-offsetY*0.2}px)`}}/>
       </div>
       
-     <div className="texting" style={{transform: `translateY(${-offsetY*0.2}px)`}}>
-     <div className="text">
+     <div className="texting"  style={{transform: `translateY(${-offsetY*0.2}px)`}}>
+      <div className='raper'>
+      <div className="text"  id="apropos">
       <h1> A Propos de nous</h1>
        <p id="para">we are here to help you choose what suits you , bring your dream house , and enjoy the comfort and peace , have the amazing experience of buying and selling realities with us ! , what are you waiting for create your account , and bring your chance now ! </p>
-     
+
         </div>
         <img src={deal} alt="deal" id="deal" className ="deal"/>
 
-        <img src={light} alt="light" id="light" className ="light"/>
-     </div>
-     <div className="last">
+      </div>
+     
+      <div className='rapper'>
+      <div className="contactus" id="contactus">
+      <img src={deal} alt="deal" id="deal" className ="deal"/>
+      <div className='textcontactus'>
+      <h1> Contact Us</h1>
+       <p >we are here to help you choose what suits you , bring your dream house , and enjoy the comfort and peace , have the amazing experience of buying and selling realities with us ! , what are you waiting for create your account , and bring your chance now ! </p>
+
+      </div>
+        </div>
+      </div>
+      <div className="last">
      
      <img src={but} alt="but" id="but" className ="but"/>
      <img src={kws} alt="kws" id="kws" className ="kws"   />
      </div>
-    
    
+        
+     </div>
+     
+    
     </div>
+   
   );
 }
 

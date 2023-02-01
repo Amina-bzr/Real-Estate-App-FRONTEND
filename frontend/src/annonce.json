@@ -1,0 +1,52 @@
+[
+          
+            {
+              "id":"1",
+            "titre":"maison pour vente",
+            "Surface":"456",
+            "Description":"k,bdpkvmfl",
+            "Categorie":"vente",
+            "Wilaya":"Alger",
+            "Commune":"Babez",
+            "Type":"maison",
+            "Adresse":";mblgmgkdfg",
+            "Prix":"40000DA"
+            },
+            {
+                "id":"2",
+                "titre":"villa",
+                "Surface":"456",
+                "Description":"k,bdpkvmfl",
+                "Categorie":"vente",
+                "Wilaya":"Alger",
+                "Commune":"OuedSmar",
+                "Type":"maison",
+                "Adresse":";mblgmgkdfg",
+                "Prix":"50000DA"
+                },
+                {
+                    "id":"3",
+                    "titre":"villa",
+                    "Surface":"456",
+                    "Description":"k,bdpkvmfl",
+                    "Categorie":"vente",
+                    "Wilaya":"Guelma",
+                    "Commune":"Boulevard",
+                    "Type":"maison",
+                    "Adresse":";mblgmgkdfg",
+                    "Prix":"60000DA"
+                    },
+                    {
+                      "id":"4",
+                      "titre":"Bnagalow Nouveau",
+                      "Surface":"456",
+                      "Description":"k,bdpkvmfl",
+                      "Categorie":"vente",
+                      "Wilaya":"Guelma",
+                      "Commune":"19 juin",
+                      "Type":"maison",
+                      "Adresse":";mblgmgkdfg",
+                      "Prix":"60000DA"
+                      }
+            
+  ]

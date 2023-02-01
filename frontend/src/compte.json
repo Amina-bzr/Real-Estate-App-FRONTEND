@@ -1,0 +1,13 @@
+[
+    {
+        "last_name": "karim",
+       "first_name": "meriem",
+        "email": "batoul",
+        "photo":"blob:http://localhost:5173/1cb4978e-c691-4ee6-a198-227bb6d00df6",
+        "contact":{
+          "adresse":"alger babez",
+          "telephone":"06789645"
+
+        }
+    }
+]

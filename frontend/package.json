@@ -12,6 +12,7 @@
     "@react-oauth/google": "^0.5.1",
     "antd": "^5.1.2",
     "aos": "^2.3.4",
+    "axios": "^1.2.6",
     "bootstrap": "^5.2.3",
     "faker": "^6.6.6",
     "formik": "^2.2.9",

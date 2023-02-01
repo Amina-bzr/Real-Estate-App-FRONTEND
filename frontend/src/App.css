@@ -5,9 +5,10 @@
     text-align: center;
     display: block;
     align-items: center;
-    background-color: #010219;
+    background-color:#010219;
     color: white;
     font-family: poppins;
+   height: 130%;
   }
   img{
     width: 80%;
@@ -149,62 +150,82 @@
   }
   
   .texting{
-   
-    max-width: 80%;
-    display: flex;
-   align-items: flex-start;
-   justify-content: flex-start;
-   left: 10%;
    min-height: 100%;
     position:relative;
-    background-color: #010219;
+    background-color:#010219;
     top: -20px;
     padding-top: 6%;
+    padding-left: 0%;
     color: white;
-   
     text-align: left;
+    margin-left: 0%;
+    margin-bottom: 0%  !important;
+  }
+  .rapper{
+    max-height: 80%;
+    display: flex;
+    justify-content: flex-start;
+ 
     
-  
+  }
+  .raper{
+    max-height: 80%;
+    display: flex;
+   padding-left: 20%;
+   padding-top: 0%;
+    justify-content: flex-start;
+   
+  }
+  .contactus{
+    
+    margin-top: 8%;
+    display: flex;
+    margin-left: 20%;
+    padding-bottom: 5%;
+  }
+  .textcontactus{
+    max-width: 29%;
+    margin-left: 20%;
   }
   .text{
-   
-
-    width: 31%;
     margin-left: 0%;
-    margin-top: 8%;
-    margin-right: 5%;
-    
+    max-width: 30%;
+    margin-right: 13%;
   }
   #para{
     margin-top: 15%;
-    font-size: x-large;
-    line-height: 100%;
+    font-size:large;
+    line-height: 115%;
+    left: 0%;
+    max-width: 80%;
+
   }
   .text h1{
     font-size: xx-large;
+    left: 0%;
   }
   #deal{
-    
-    margin-right: 10%;
-    margin-top: 8%;
-    max-width: 30%;
+    max-width: 25%;
+    margin-left: 0%;
   }
   
   
   .last {
     position: relative;
-    top: 0;
-    left: 0;
-  }
-  .but {
-    position: relative;
+    
     top: 0;
     left: 0;
     
   }
+  .but {
+    position: relative;
+    bottom: 50%;
+    left: 10%;
+    
+  }
   .kws {
     position: absolute;
-    top: 0%;
+    top: -1%;
     left: 10%;
    
   }

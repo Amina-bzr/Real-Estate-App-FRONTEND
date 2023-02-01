@@ -51,6 +51,11 @@
 .selects {
   display: grid;
   grid-template-columns: 50% 50%;
+  margin-bottom: 2%;
+  
+}
+#Commune{
+    width: 100%;
 }
 .first{
     display: grid;
@@ -58,7 +63,7 @@
   width: 50%;
  margin-bottom: 2%;
 }
-#parag{
+#Description{
     width: 50%;
     height: 15%;
     border: 0ch;

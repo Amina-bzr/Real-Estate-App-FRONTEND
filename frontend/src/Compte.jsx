@@ -5,54 +5,69 @@ import avatar from "./assets/avatar.jpg";
 import account from "./assets/compte.png"
 import { useCallback,useEffect, useRef } from 'react';
 import Nav from './Navbar';
+import profile from "./compte.json";
 import {useFormik} from 'formik';
-
+import { useLocation } from 'react-router-dom';
 
 
 function Compte(){
-    
+   const location=useLocation();
+  
     const formik = useFormik({
         initialValues: {
-          nom: "",
-          prenom: "",
+          last_name: "",
+          first_name: "",
           email: "",
-          tlf: "",
-          adresse:"", 
-          
+          photo:"",
+          contact:{
+            adresse:"",
+            telephone:"",
+
+          }
         },
         onSubmit: (values) => {
             
             console.log("form submitted");
-            console.log(values);
+           console.log(values);
            const jason=JSON.stringify(values);
-            console.log(file);
-           
+          
+          
           },
     })
     
    
     const [file, setFile] = useState();
     
-    
+    function handleboth(e){
+      handleChange(e);
+      formik.handleChange(e);
+    }
     function handleChange(e) {
         console.log(e.target.files);
         setFile(URL.createObjectURL(e.target.files[0]));
-        
+       
     }
+    
+      useEffect(() => {
+        setFile(profile[0].photo);
+        console.log(profile[0].photo);
+       
+       let useremail=location.state.useremail;
+       console.log(useremail);
+      }, []);
+    
     return (
    <div className="Compte">
-    <div className='None'>
-    
-    <h1>jnck</h1>
+   
     <Nav/>
-    <h1>Hellobodydkljvofjokt</h1>
-    </div>
-    <div className='body'>
     
+    <div className='body'>
     <img src={account} alt="account" id="account"/>
+    
+   
     <div className='info'>
     <div className='uploader'>
-    <input type="file" onChange={handleChange} id="file" />
+    <input type="file" onChange={handleboth} id="file"  value={formik.values.photo} />
     <label for="file" id="lfile"> Choisir photo</label>
             <img src={file} id="profilepic" style={{
                 width:"90px",
@@ -69,35 +84,43 @@ function Compte(){
            
     
     </div>
-    <div className='text'>
-    <h2>Nom Prenom</h2>
-    
+    {
+      profile.map(cmpt=>(
+        <div className='nomprenom'>
+    <h2>{"   "+cmpt.first_name+" "+cmpt.last_name}</h2>
     </div>
+      ))
+    }
+   
 
     </div>
     
-   
-    <div className='formulaire'>
-    <label >Nom</label>
-    <label >Prénom</label>
-    <input type="text" placeholder='   Nom' id="nom" onChange={formik.handleChange}
-                  value={formik.values.nom} />
+   {
+    profile.map(cmpt=>(
+      <div className='formulaire'>
+      <label >Nom</label>
+      <label >Prénom</label>
+      <input type="text" placeholder={cmpt.last_name} id="last_name" onChange={formik.handleChange}
+                    value={formik.values.last_name} />
+      
+      <input type="text" placeholder={cmpt.first_name} id="first_name" onChange={formik.handleChange}
+                    value={formik.values.first_name} />
+      <label >Adress Email</label>
+      <label >Téléphone</label>
+      <input type="text" placeholder={cmpt.email} id="email" onChange={formik.handleChange}
+                    value={formik.values.email}/>
+      <input type="text"  placeholder={cmpt.contact.telephone} id="contact.telephone" onChange={formik.handleChange}
+                    value={formik.values.contact.telephone} />
+      <label >Adress</label>
+      <label id="description" >Description</label>
+      <input type="text"  placeholder={cmpt.contact.adresse} id="contact.adresse" onChange={formik.handleChange}
+                    value={formik.values.contact.adresse} />
+      <input type="text"  placeholder='     profession' id="description"/>
+       
+      </div>
+    ))
+   }
     
-    <input type="text" placeholder='   Prenom' id="prenom" onChange={formik.handleChange}
-                  value={formik.values.prenom} />
-    <label >Adress Email</label>
-    <label >Téléphone</label>
-    <input type="text" placeholder='   @ email' id="email" onChange={formik.handleChange}
-                  value={formik.values.email}/>
-    <input type="text"  placeholder='     0556789321' id="tlf" onChange={formik.handleChange}
-                  value={formik.values.tlf} />
-    <label >Adress</label>
-    <label id="description" >Description</label>
-    <input type="text"  placeholder='     Alger-OuedSmar' id="adresse" onChange={formik.handleChange}
-                  value={formik.values.adresse} />
-    <input type="text"  placeholder='     profession' id="description"/>
-     
-    </div>
     <button id="valider" type="submit" onClick={formik.handleSubmit} >Valider</button>
     </div>
    

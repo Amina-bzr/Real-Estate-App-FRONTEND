@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import './images.css';
 
-const images = () => {
-  const [selectedImages, setSelectedImages] = useState([]);
+const images = ({importimages}) => {
+ const [selectedImages, setSelectedImages] = useState([]);
 
   const onSelectFile = (event) => {
     const selectedFiles = event.target.files;
@@ -13,7 +13,7 @@ const images = () => {
     });
 
     setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-
+    importimages(selectedImages);
     // FOR BUG IN CHROME
     event.target.value = "";
   };
@@ -75,6 +75,7 @@ const images = () => {
               </div>
             );
           })}
+         
       </div>
     </section>
      </div>
