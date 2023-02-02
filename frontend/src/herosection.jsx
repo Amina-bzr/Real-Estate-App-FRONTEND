@@ -41,22 +41,28 @@ const Routerchange=(user) =>{
 }
 const[token,settoken]=useState("");
 useEffect(()=>{
-  axios.post('http://annoncesimmobilieres.pythonanywhere.com/token-auth/')
-  .then(function (response) {
-    console.log(response.data);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+  
 
 },[]);
 
  function HandleCalback(response){
   
   var userObject= jwt_decode(response.credential);
-  console.log(userObject.email);
-
-  let url='https://annoncesimmobilieres.pythonanywhere.com/users/';
+  console.log(userObject.email); 
+  console.log(userObject.name);
+  console.log(userObject.given_name);
+  console.log(userObject.family_name);
+  
+  axios.post('http://annoncesimmobilieres.pythonanywhere.com/token-auth/',{
+    userObject
+  })
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ 
   /*fetch(url,{
     method:'POST',
     headers:{

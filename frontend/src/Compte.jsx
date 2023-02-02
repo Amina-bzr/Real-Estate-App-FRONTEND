@@ -8,7 +8,7 @@ import Nav from './Navbar';
 import profile from "./compte.json";
 import {useFormik} from 'formik';
 import { useLocation } from 'react-router-dom';
-
+import axios from 'axios';
 
 function Compte(){
    const location=useLocation();
@@ -54,6 +54,15 @@ function Compte(){
        
        let useremail=location.state.useremail;
        console.log(useremail);
+      let url='https://annoncesimmobilieres.pythonanywhere.com/users/?email='+useremail;
+       axios.get(url)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ 
       }, []);
     
     return (
