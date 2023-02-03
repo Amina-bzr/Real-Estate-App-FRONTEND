@@ -5,15 +5,28 @@ import './Publier.css';
 import Images from './images';
 import pubimg from './assets/publierann.png';
 import {Formik, useFormik} from 'formik';
-
+import Topbar from './topbar';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 function Publier(){
     const [tableauimages,settableauimage]=useState([]);
+    const [changed,setchanged]=useState(false);
+    const[token,settoken]=useState("");
+    const [data,setdata]=useState([]);
+    const location=useLocation();
+    useEffect(() => {
+     const array=[location.state.useremail,location.state.tok];
+     setdata(array);
+ 
+      }, []);
+    
     const importimages =(imag)=>{
         settableauimage(imag);
         console.log(imag);
     }
     const forme = useFormik({
         initialValues: {
+         photos:[],
          titre:"",
          Surface:"",
          Wilaya:"",
@@ -21,24 +34,40 @@ function Publier(){
          Description:"",
          Categorie:"",
          Type:"",
-         Adresse:"",
+         Addresse:"",
          Prix:"",
-         date_pub:"",
          
         },
         onSubmit: (values) => {
             
             console.log("form submitted");
-           
-           const annonce=JSON.stringify(values);
-          console.log(annonce);
+            console.log(values);
+            console.log(data[1]);
+            fetch('https://annoncesimmobilieres.pythonanywhere.com/annonces/', {
+              method: 'POST',
+              headers: {
+               'Content-Type': 'application/json',
+                    Authorization: `Token ${data[1]}`,
+              },
+                       body:JSON.stringify(values)
+            })
+              .then(response => response.json())
+              .then(result => {
+                console.log(result);
+              })
+              .catch(error => {
+                console.error(error);
+              });
+              
+          
           
           },
     });
+    
 
     return (
    <div className="publier">
-   <Nav/>
+   <Nav data={data}/>
     <div className='form'> 
     <img src={pubimg} alt="pubimg" id="pubimg"/>
     <div className='first'>
@@ -137,8 +166,8 @@ function Publier(){
     <input type="text" placeholder='   Commune' id="Commune" value={forme.values.Commune} onChange={forme.handleChange} />
     </div>
    
-       <label for="Adresse" id="lAdresse"> Adresse</label>
-    <input type="text" placeholder='   Adresse' id="Adresse" value={forme.values.Adresse} onChange={forme.handleChange} />
+       <label for="Addresse" id="lAdresse"> Adresse</label>
+    <input type="text" placeholder='   Adresse' id="Addresse" value={forme.values.Addresse} onChange={forme.handleChange} />
     <label for="Prix" id="lPrix"> Prix</label>
     <input type="text" placeholder='   Prix' id="Prix" value={forme.values.Prix} onChange={forme.handleChange} />
     <div className='imgupload'>

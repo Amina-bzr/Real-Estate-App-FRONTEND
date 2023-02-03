@@ -6,53 +6,161 @@ import result from './assets/result.png';
 import modele from './assets/Modele.jpg';
 import axios from 'axios';
 import { useCallback,useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Nav from './Navbar';
-import anonces from './annonce.json';
+
 function Home (){
-   const [dataannonce,setdata]=useState([]);
+   const [anonces,setanonces]=useState([]);
    const[searchkey,setsearchkey]=useState("");
+  
    const [wilayafiltre,setwilaya]=useState("");
    const [communefiltre,setcommune]=useState("");
    const [typefiltre,settype]=useState("");
    const[date1,setdate1]=useState("");
    const[date2,setdate2]=useState("");
+   const[data,setdata]=useState([]);
     let navigate = useNavigate(); 
-    function todetails (){ 
-      let path = '/details'; 
-      navigate(path);
-    }
+    const location=useLocation();
    function  handlekeydown(event){
       if (event.key === 'Enter') {
          // call the function you want to execute here
          console.log(searchkey);
+      let url="https://annoncesimmobilieres.pythonanywhere.com/annonces/?titre="+searchkey;
+         axios.get(url)
+       .then(function (response) {
+         console.log(response.data);
+         setanonces(response.data);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
 
        }
     }
     function seechanges(){
       console.log(dataannonce);
     }
-   function filtrewilaya(wilaya){
-     axios.get("127.0.0.1:8000/?Wilaya=",wilaya)
-     .then(response=>{
-      console.log(response.data)
-     })
-     .catch(error=>{
-      console.log(error);
-     });
+   
+   useEffect(()=>{
+    const array=[location.state.useremail,location.state.tok];
+     setdata(array);
+      axios.get('http://annoncesimmobilieres.pythonanywhere.com/annonces')
+       .then(function (response) {
+         console.log(response.data);
+         setanonces(response.data);
+         console.log(response.data[1].photos[0].photo);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+
+   },[]);
+   function filtrewilaya(wil){
+      
+      let url="https://annoncesimmobilieres.pythonanywhere.com/annonces/?Wilaya="+wil;
+      if(wil!=="none")
+      {
+        console.log(wil);
+        axios.get(url)
+        .then(function (response) {
+          console.log(response.data);
+          setanonces(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+      else{
+        const array=[location.state.useremail,location.state.tok];
+     setdata(array);
+      axios.get('http://annoncesimmobilieres.pythonanywhere.com/annonces')
+       .then(function (response) {
+         console.log(response.data);
+         setanonces(response.data);
+         console.log(response.data[1].photos[0].photo);
+       })
+       .catch(function (error) {
+         console.log(error);
+       }); 
+      }
+      
+
    }
+   function postcommune(com){
+     console.log(com);
+     let url="https://annoncesimmobilieres.pythonanywhere.com/annonces/?Commune="+com;
+     axios.get(url)
+       .then(function (response) {
+         console.log(response.data);
+         setanonces(response.data);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+
+   }
+   function posttype(typ){
+      
+      let url="https://annoncesimmobilieres.pythonanywhere.com/annonces/?Type="+typ;
+      if(typ !== "none"){
+        console.log(typ);
+        axios.get(url)
+        .then(function (response) {
+          console.log(response.data);
+          const intersect = response.data.filter((element) =>
+           anonces.some((item) => JSON.stringify(element) === JSON.stringify(item))
+         );
+
+          setanonces(intersect);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+      else{
+        const array=[location.state.useremail,location.state.tok];
+     setdata(array);
+      axios.get('http://annoncesimmobilieres.pythonanywhere.com/annonces')
+       .then(function (response) {
+         console.log(response.data);
+         const intersect = response.data.filter((element) =>
+         anonces.some((item) => JSON.stringify(element) === JSON.stringify(item))
+       );
+
+        setanonces(intersect);
+       })
+       .catch(function (error) {
+         console.log(error);
+       }); 
+      }
+      
+   }
+   function filtreperiode(){
+    console.log(date1);
+    console.log(date2);
+    let url="https://annoncesimmobilieres.pythonanywhere.com/annonces/?min_date="+date1+"&max_date="+date2;
+    axios.get(url)
+      .then(function (response) {
+        console.log(response.data);
+        setanonces(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+   }
+   
     
     return (
    <div className="Home">
-
-    <Nav/>
+    
     <div className='homebody'>
     <img src={acceuil} alt="acceuil" id="acceuil" className="acceuil"/>
     <input type="text" id="recherche" placeholder='       Rechercher' onChange={(e)=>{setsearchkey(e.target.value)}} onKeyDown={handlekeydown} />
     <img src={bar} alt="bar" id="bar" className="bar"/>
     
-    <div className='Wilaya' onchange={(e)=>{filtrewilaya(e.target.value)}}>
-    <select>
+    <div className='Wilaya' >
+    <select onChange={(e)=>{filtrewilaya(e.target.value)}}>
+       <option>none</option>
         <option>Adrar</option>
         <option> Chlef</option>
         <option> Lagouat</option>
@@ -112,23 +220,30 @@ function Home (){
         <option>El M’Ghaier</option>
         <option>El Meniaa</option>
     </select>
-    <input type="text" placeholder='La commune' onchange={(e)=>{setcommune(e.target.value)}}/>
+    <input type="text" placeholder='La commune' onChange={(e)=>{postcommune(e.target.value)}}/>
     </div>
-    <div className='Type' onchange={(e)=>{settype(e.target.value)}}>
+    <div className='Type' onChange={(e)=>{posttype(e.target.value)}}>
        <select>
+        <option>none</option>
         <option>Terrain</option>
         <option>Terrain Agricole</option>
         <option>Appartement</option>
         <option>Maison</option>
         <option>Bangalow</option>
+        <option>villa</option>
         <option>Autre</option>
        </select>
     </div>
+    <div className='periode'>
     <div className='Categorie'>
-    <input type="date" placeholder='date1' onchange={(e)=>{setdate1(e.target.value)}}/>
-    <input type="date" placeholder='date2' onchange={(e)=>{setdate2(e.target.value)}}/>
+    <input type="date" placeholder='date1' onChange={(e)=>{setdate1(e.target.value)}}/>
+    <input type="date" placeholder='date2' onChange={(e)=>{setdate2(e.target.value)}}/>
+    
     </div>
-   
+    <button id='subbutton' onClick={filtreperiode} > submit</button>
+    </div>
+    
+    
    
 
     <div className='shopcard'>
@@ -143,20 +258,18 @@ function Home (){
         <h2>{card.titre}</h2>
         <h4>{card.Wilaya}</h4>
         <div className='det'>
-           <h2>{card.Prix}</h2>
-           <button onClick={todetails} >Details</button>
+           <h2>{card.Prix+"DA"}</h2>
+           <button  >Details</button>
            </div>
        
       </div>
-  
-  
    ))}
    </div>
        
     </div>
   
     </div>
-    
+    <Nav data={data}/>
    </div>
 
 );

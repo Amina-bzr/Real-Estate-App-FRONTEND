@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCallback,useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
-function Messages(){
+function Mesannonces(){
     const location=useLocation();
     const [data,setdata]=useState([]);
     useEffect(()=>{
@@ -10,11 +10,11 @@ function Messages(){
          setdata(array);
        },[]);
     return (
-   <div className="Messages">
+   <div className="Mesannonces">
     <Navbar data={data}/>
-    <h1>Hello it's messages page  </h1>
+    <h1>Hello it's mes annonces page </h1>
    </div>
 
 );
 }
-export default Messages;
+export default Mesannonces;

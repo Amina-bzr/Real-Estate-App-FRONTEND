@@ -15,7 +15,7 @@ import kws from './assets/kws.png';
 import logohero from './assets/logohero.png';
 import AOS from 'aos';
 import jwt_decode from "jwt-decode";
-
+import ContactUs from './Contactus';
 import {motion as m, resolveMotionValue } from "framer-motion";
 import { AiFillGoogleCircle } from 'react-icons/ai';
 
@@ -31,49 +31,33 @@ useEffect(()=>{
 
 },[]);
 let navigate = useNavigate(); 
-const Routerchange=(user) =>{ 
+const Routerchange=(user,token) =>{ 
   let path = '/Compte';
+  let varia=token.token;
   navigate(path,{
     state: {
       useremail: user,
+      tok:varia,
     }
   });
 }
-const[token,settoken]=useState("");
-useEffect(()=>{
-  
 
-},[]);
 
  function HandleCalback(response){
-  
   var userObject= jwt_decode(response.credential);
-  console.log(userObject.email); 
-  console.log(userObject.name);
-  console.log(userObject.given_name);
-  console.log(userObject.family_name);
-  
   axios.post('http://annoncesimmobilieres.pythonanywhere.com/token-auth/',{
     userObject
   })
   .then(function (response) {
     console.log(response.data);
+    let token=response.data;
+    Routerchange(userObject.email,response.data);
   })
   .catch(function (error) {
     console.log(error);
   });
  
-  /*fetch(url,{
-    method:'POST',
-    headers:{
-      'Content-type':'application/json',
-     
-    },
-    body:JSON.stringify(userObject)
-  }).then((response)=>{
-    console.log(response);
-  })*/
-  Routerchange(userObject.email);
+  
  };
 
  useEffect(()=>{
@@ -126,25 +110,29 @@ useEffect(()=>{
       <img src={group} alt="group" id="group" className ="group" style={{transform: `translateY(${-offsetY*0.2}px)`}}/>
       </div>
       
-     <div className="texting"  style={{transform: `translateY(${-offsetY*0.2}px)`}}>
-      <div className='raper'>
-      <div className="text"  id="apropos">
-      <h1> A Propos de nous</h1>
-       <p id="para">we are here to help you choose what suits you , bring your dream house , and enjoy the comfort and peace , have the amazing experience of buying and selling realities with us ! , what are you waiting for create your account , and bring your chance now ! </p>
-
-        </div>
-        <img src={deal} alt="deal" id="deal" className ="deal"/>
+     <div className="texting" id="apropos" style={{transform: `translateY(${-offsetY*0.2}px)`}}>
+      
+     
+      <div className='rapper' >
+      <div className="contactus" >
+      <img src={deal} alt="deal" id="deal" className ="deal"/>
+      <div className='textcontactus' id="contactus">
+      <h1> A propos de nous
+      </h1>
+       <p >we are here to help you choose what suits you , bring your dream house , and enjoy the comfort and peace , have the amazing experience of buying and selling realities with us ! , what are you waiting for create your account , and bring your chance now ! </p>
 
       </div>
-     
+        </div>
+      </div>
       <div className='rapper'>
       <div className="contactus" id="contactus">
-      <img src={deal} alt="deal" id="deal" className ="deal"/>
-      <div className='textcontactus'>
+      <div className='textcontactus2'>
       <h1> Contact Us</h1>
        <p >we are here to help you choose what suits you , bring your dream house , and enjoy the comfort and peace , have the amazing experience of buying and selling realities with us ! , what are you waiting for create your account , and bring your chance now ! </p>
 
       </div>
+      <ContactUs/>
+      
         </div>
       </div>
       <div className="last">

@@ -5,59 +5,107 @@ import avatar from "./assets/avatar.jpg";
 import account from "./assets/compte.png"
 import { useCallback,useEffect, useRef } from 'react';
 import Nav from './Navbar';
-import profile from "./compte.json";
 import {useFormik} from 'formik';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Topbar from './topbar';
 
 function Compte(){
    const location=useLocation();
-  
+   const [useremail,setuseremail]=useState("");
+
+   const [token,settoken]=useState("");
+   const[data,setdata]=useState([]);
+  const [profile,setprofile]=useState([]);
+  const[pic,setpic]=useState();
     const formik = useFormik({
         initialValues: {
-          last_name: "",
+          last_name:"",
           first_name: "",
-          email: "",
-          photo:"",
           contact:{
-            adresse:"",
+            addresse:"",
             telephone:"",
-
           }
         },
         onSubmit: (values) => {
             
             console.log("form submitted");
            console.log(values);
-           const jason=JSON.stringify(values);
+           console.log(token);
+           console.log(profile[0].contact.id);
+           let formdata=new FormData();
+           formdata.append("utilisateur",profile[0].contact.id);
+           formdata.append("picture",pic);
           
-          
+           let url='https://annoncesimmobilieres.pythonanywhere.com/users/'+profile[0].id;
+         /* fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+             Authorization: `Token ${token}`,
+            },
+                     body: JSON.stringify(values)
+          })
+            .then(response => response.json())
+            .then(result => {
+              console.log(result);
+             // window.location.reload();
+            })
+            .catch(error => {
+              console.error(error);
+            });*/
+            ////////////////////////////////////////////////////
+            let api='https://annoncesimmobilieres.pythonanywhere.com/contacts/'+profile[0].contact.id+'/';
+           fetch(api, {
+              method: 'PUT',
+              headers: {
+                 Authorization: `Token ${token}`,
+              },
+                       body:JSON.stringify(pic),
+            })
+              .then(response => response)
+              .then(result => {
+                console.log(result);
+               // window.location.reload();
+              })
+              .catch(error => {
+                console.error(error);
+              });
+              
           },
-    })
+          enableReinitialze: true,
+    });
     
    
     const [file, setFile] = useState();
-    
+   
     function handleboth(e){
       handleChange(e);
-      formik.handleChange(e);
+      setpic(e.target.files[0]);
+      //formik.handleChange(e);
     }
     function handleChange(e) {
-        console.log(e.target.files);
+       // console.log(e.target.files);
         setFile(URL.createObjectURL(e.target.files[0]));
        
     }
     
       useEffect(() => {
-        setFile(profile[0].photo);
-        console.log(profile[0].photo);
-       
-       let useremail=location.state.useremail;
-       console.log(useremail);
-      let url='https://annoncesimmobilieres.pythonanywhere.com/users/?email='+useremail;
+      setuseremail(location.state.useremail) ;
+      settoken(location.state.tok) ;
+     const array=[location.state.useremail,location.state.tok];
+     setdata(array);
+      let url='https://annoncesimmobilieres.pythonanywhere.com/users/?email='+location.state.useremail;
        axios.get(url)
-  .then(function (response) {
-    console.log(response.data);
+      .then(function (response) {
+       console.log(response.data);
+       setprofile(response.data);
+       setFile(response.data[0].contact.picture);
+       formik.values.first_name=response.data[0].first_name;
+       formik.values.last_name=response.data[0].last_name;
+       formik.values.contact.addresse=response.data[0].contact.addresse;
+       formik.values.contact.telephone=response.data[0].contact.telephone;
+       
   })
   .catch(function (error) {
     console.log(error);
@@ -68,7 +116,7 @@ function Compte(){
     return (
    <div className="Compte">
    
-    <Nav/>
+    <Nav data={data} />
     
     <div className='body'>
     <img src={account} alt="account" id="account"/>
@@ -83,20 +131,18 @@ function Compte(){
                 height:"90px",
                 borderRadius:"50%",
                 objectFit:"cover",
-                position:"absolute",
-                
+                position:"absolute", 
                zIndex:"2",
-
-
-
             }} />
            
     
     </div>
+   
     {
       profile.map(cmpt=>(
         <div className='nomprenom'>
     <h2>{"   "+cmpt.first_name+" "+cmpt.last_name}</h2>
+    
     </div>
       ))
     }
@@ -116,14 +162,13 @@ function Compte(){
                     value={formik.values.first_name} />
       <label >Adress Email</label>
       <label >Téléphone</label>
-      <input type="text" placeholder={cmpt.email} id="email" onChange={formik.handleChange}
-                    value={formik.values.email}/>
+      <input type="text" placeholder={cmpt.email} id="email"/>
       <input type="text"  placeholder={cmpt.contact.telephone} id="contact.telephone" onChange={formik.handleChange}
                     value={formik.values.contact.telephone} />
       <label >Adress</label>
       <label id="description" >Description</label>
-      <input type="text"  placeholder={cmpt.contact.adresse} id="contact.adresse" onChange={formik.handleChange}
-                    value={formik.values.contact.adresse} />
+      <input type="text"  placeholder={cmpt.contact.adresse} id="contact.addresse" onChange={formik.handleChange}
+                    value={formik.values.contact.addresse} />
       <input type="text"  placeholder='     profession' id="description"/>
        
       </div>

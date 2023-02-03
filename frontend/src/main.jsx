@@ -8,6 +8,9 @@ import Details from './Details';
 import Messages from "./Messages";
 import Compte from "./Compte";
 import Publier from "./Publier";
+import Topbar from "./topbar";
+import Contactus from './Contactus';
+import Mesannonces from './Mesannonces';
 import {BrowserRouter , createBrowserRouter, RouterProvider,Route} from "react-router-dom";
 const router=createBrowserRouter([
 {
@@ -15,12 +18,25 @@ const router=createBrowserRouter([
   element: <App/>,
 },
 {
+  path: "/mesannonces",
+  element: <Mesannonces/>,
+},
+{
   path: "/home",
   element: <Home/>,
 },
 {
+  path: "/contactus",
+  element: <Contactus/>,
+},
+{
   path: "/nav",
   element: <Navbar/>,
+},
+{
+  path:"/topbar",
+  element:<Topbar/>
+
 },
 {
   path: "/details",
