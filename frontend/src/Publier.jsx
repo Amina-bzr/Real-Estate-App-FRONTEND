@@ -26,7 +26,6 @@ function Publier(){
     }
     const forme = useFormik({
         initialValues: {
-         photos:[],
          titre:"",
          Surface:"",
          Wilaya:"",
@@ -53,6 +52,7 @@ function Publier(){
               .then(response => response.json())
               .then(result => {
                 console.log(result);
+                uploadphotos(result);
               })
               .catch(error => {
                 console.error(error);
@@ -64,6 +64,39 @@ function Publier(){
           
           },
     });
+    function uploadphotos(resp){
+      const id_valeur=resp.id;
+      console.log(tableauimages);
+      for(var i=0;i<tableauimages.length;i++)
+      {
+        const obj={ annonce:id_valeur ,photo:tableauimages[i]  };
+        const getFormData = obj => Object.keys(obj).reduce((formData, key) => {
+         formData.append(key, obj[key]);
+         return formData;
+         }, new FormData());
+      const final=getFormData(obj);
+      console.log(final);
+      fetch('https://annoncesimmobilieres.pythonanywhere.com/photos/', {
+         method: 'POST',
+         headers: {
+
+          Authorization: `Token ${data[1]}`,
+         },
+         body: final
+       })
+         .then(response => response.json())
+         .then(result => {
+           console.log(result);
+          
+         })
+         .catch(error => {
+           console.error(error);
+         });
+       }
+
+
+      }
+
     
 
     return (
