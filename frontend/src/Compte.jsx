@@ -75,6 +75,9 @@ function Compte(){
                console.error(error);
              });
            }
+           else{
+            window.location.reload();
+           }
             
               
           },

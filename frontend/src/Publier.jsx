@@ -40,7 +40,11 @@ function Publier(){
         onSubmit: (values) => {
             
             console.log("form submitted");
-           
+           if(tableauimages.length===0)
+           {
+            window.alert("upload au mois une image!");
+           }
+           else{
             fetch('https://annoncesimmobilieres.pythonanywhere.com/annonces/', {
               method: 'POST',
               headers: {
@@ -62,7 +66,8 @@ function Publier(){
               
           
           
-          },
+          }
+        },
     });
     function uploadphotos(resp){
       const id_valeur=resp.id;
@@ -87,6 +92,7 @@ function Publier(){
          .then(response => response.json())
          .then(result => {
            console.log(result);
+           
           
          })
          .catch(error => {
@@ -121,8 +127,8 @@ function Publier(){
         <option>Vente</option>
         <option>Echange</option>
         <option>Location</option>
-        <option>Location pour vacance</option>
-        <option>Autre</option>
+        <option>Location pour vacances</option>
+       
        </select>
       
     <select id="Type" value={forme.values.Type} onChange={forme.handleChange} >

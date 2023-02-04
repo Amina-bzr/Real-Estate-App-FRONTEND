@@ -48,6 +48,7 @@ height: 320px;
     width: 90%;
     display: flex;
     padding-bottom: 10%;
+    
 }
 
 .det button{
@@ -58,7 +59,7 @@ height: 320px;
     cursor: pointer;
     font-weight: 500;
     border-radius: 30px;
-   margin-left: 3%;
+   margin-left: 15%;
 
 }
 
