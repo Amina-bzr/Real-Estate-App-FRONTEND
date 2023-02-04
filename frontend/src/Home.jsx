@@ -331,7 +331,7 @@ function Home (){
     
       
       <div className='Product'>
-      <img src={modele} alt="modele" id="modele" className="modele"/>
+      <img src={card.photos[0].photo} alt="modele" id="modele" className="modele"/>
         <h2>{card.titre}</h2>
         <h4>{card.Wilaya}</h4>
         <div className='det'>

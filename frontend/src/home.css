@@ -36,10 +36,10 @@ background-color: white;
 border-radius: 30px;
 margin-left:6%;
 margin-right: 4%;
-margin-bottom: 0%;
+margin-bottom: 6%;
 padding-top: 1%;
 line-height: 0%;
-max-height: 80%;
+height: 320px;
 
 }
 
@@ -47,12 +47,9 @@ max-height: 80%;
    
     width: 90%;
     display: flex;
-    
+    padding-bottom: 10%;
 }
-.det h2{
 
-   margin-right: 30%;
-}
 .det button{
     width:40%;
     color: #F8F6F6;
@@ -61,14 +58,15 @@ max-height: 80%;
     cursor: pointer;
     font-weight: 500;
     border-radius: 30px;
+   margin-left: 3%;
 
 }
 
 
 #modele{
-    margin-top: 2%;
+    margin-top: 3%;
     width:90%;
-    height: 55%;
+    height: 170px;
     object-fit: cover;
     border-radius: 30px;
 }

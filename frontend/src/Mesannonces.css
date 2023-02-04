@@ -1,0 +1,70 @@
+.Mes{
+    background-color: #F8F6F6;
+    align-items:flex-start;
+   
+    display:flex;
+    position: absolute;
+    width: 99%;
+    height: 100%;
+    overflow-x: hidden;
+}
+.container{
+    margin-top: 4%;
+    width: 55%;
+    position: absolute;
+    right: 12%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    padding-top: 3%;
+    align-items: flex-start;
+    background-color:lightgray;
+
+}
+.box{
+    background-color: #F8F6F6;
+    width: 90%;
+    height: 50%;
+    display: flex;
+    font-family: Poppins;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    padding-left:2%;
+    padding-right:2%;
+}
+.view{
+    width: 48%;
+   
+    
+}
+.display{
+   
+   
+    display: flex;
+}
+#myimage{
+    
+    width:70%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+#myimages{
+    width:55%;
+    margin-bottom: 3%;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+
+}
+.others{
+    
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.view h4 {
+    margin-left: 13%;
+}
