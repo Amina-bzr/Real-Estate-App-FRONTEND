@@ -1,0 +1,187 @@
+.Home{
+    background-color: #F8F6F6;
+    align-items: center;
+    display:flex;
+    position: absolute;
+    top: 0%;
+    justify-items: center;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.nd_part{
+    position: absolute;
+    width: 100%;
+    
+    background-color:  #F8F6F6;
+    margin-top: 10%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    padding-top: 1%;
+    padding-bottom: 10%;
+}
+#pubimg{
+    width: 100%;
+    height: 100%;
+}
+.Product{
+display: flex;
+font-family: Poppins;
+flex-direction: column;
+align-items: center;
+align-content: center;
+background-color: white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+border-radius: 30px;
+margin-left:6%;
+margin-right: 4%;
+margin-bottom: 6%;
+padding-top: 1%;
+line-height: 0%;
+height: 320px;
+
+}
+
+.det{
+   
+    width: 90%;
+    display: flex;
+    padding-bottom: 10%;
+    
+}
+
+.det button{
+    width:40%;
+    color: #F8F6F6;
+    background-color: #081C59;
+    font-family: Poppins;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 30px;
+   margin-left: 15%;
+
+}
+
+
+#modele{
+    margin-top: 3%;
+    width:90%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.Wilaya{
+   
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    margin-left: 7%;
+    
+}
+.Type{
+   
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    margin-left: 28%;
+    
+}
+.Categorie{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    margin-left: 48%;
+  
+}
+.Categorie select{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;
+}
+.Type select{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;
+}
+.Wilaya input{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;
+    
+    
+}
+.Wilaya select{
+    margin-top: 2%;
+    border: 4px;
+    font-family: Poppins;
+    font-style: italic;  
+}
+.homebody{
+    display: flex;
+    flex-direction: column;
+    margin-left: 22%;
+}
+.shopcard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    margin-top: 22%;
+    background-color: #F8F6F6;
+    width: 78%;
+    height: auto;
+   
+}
+#subbutton{
+    color: white;
+    background-color: #081C59;
+    border-radius: 12px;
+    cursor: pointer;
+    position: absolute;
+    right: 13%;
+    top:80%;
+
+}
+.acceuil{
+    
+    justify-items: center;
+    max-width: 60%;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+   
+}
+#recherche{
+    width: 28%;
+    height: 50px;
+    border: 0ch;
+    border-radius: 30px;
+    font-family: Poppins;
+    font-style: italic;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    left: 34%;
+    top: 50%;
+    position: absolute;
+    
+}
+#bar{
+    position: absolute;
+    width: 70%;
+    right: 6%;
+    top: 70%;
+}
+#result{
+
+    width: 15%;
+    top: 50%;
+    left: 50%;
+
+}

@@ -1,0 +1,114 @@
+.Compte{
+ display: flex;
+    background-color:#F8F6F6;
+    width: 100%;
+    height: 100%;
+   top: 0%;
+   left: 0%;
+   position: fixed;
+    
+}
+
+
+.body{
+    padding-top: 4%;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 20%;
+    width: 80%;
+    background-color:#F8F6F6;
+}
+#account{
+    width: 35%;
+    
+}
+#file{
+    display: none;
+  
+}
+.uploader{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    overflow: hidden;
+    position: absolute;
+   
+   background: url("./assets/avatar.jpg");
+   background-size: 90px 90px;
+}
+.info{
+    display:flex;
+  
+    position: absolute;
+    width: 35%;
+    margin-top:8%;
+    margin-left: 9%;
+}
+.nomprenom{
+    display: block;
+    margin-left: 20%;
+    padding-left: 5%;
+    padding-top: 2%;
+    margin-top: 0%;
+    width: 90%;
+    font-family: poppins;
+    
+    line-height: 70%;
+}
+#lfile{
+    font-size: x-small;
+    font-family: poppins;
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    width: 10%;
+    height: 5%;
+    text-align: center;
+  top:60%;
+  left: 30%;
+    
+}
+#description {
+    opacity: 0;
+}
+.formulaire{
+    margin: 2%;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5%;
+    row-gap: 3%;
+   align-items: center;
+   justify-content:center ;
+   font-family: poppins;
+   
+}
+.formulaire input{
+    width: 320px;
+    height: 45px;
+    border: 0ch;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    left: 34%;
+    
+    font-style: italic;
+    color: rgba(158, 155, 155,4);
+    top: 50%;
+}
+#valider{
+    width: 12%;
+    height: 8%;
+    margin-top: 4%;
+    border-radius: 17px;
+    border: none;
+    color:white;
+    cursor: pointer;
+    background-color: #081C59;
+    font-family: poppins;
+    font-weight: bold;
+}
+.formulaire label{
+    font-weight: 500;
+    font-size: small;
+}

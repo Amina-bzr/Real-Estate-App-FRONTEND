@@ -1,0 +1,44 @@
+
+
+.Navbar{
+ 
+    align-items:center;
+    display: flex;
+    justify-content:flex-start;
+    padding-top: 4%;
+    flex-direction: column;
+    background-color:#F8F6F6; 
+    width: 23%;
+    height: 100%;
+    font-family: poppins;
+    position: fixed;
+    top: 0%;
+    
+}
+.Navbar button{
+    width: 70%;
+    height: 50px;
+    margin-top: 2%;
+    border-radius: 20px;
+    border: none;
+    font-family: poppins;
+    font-weight: 550;
+    color:rgba(3, 3, 3, 57%);
+    cursor: pointer;
+    background-color: #F8F6F6;
+    padding-left: 10%;
+    text-align: left;
+   word-spacing: 20%;
+
+}
+.Navbar button:hover{
+    background-color: rgba(33, 68, 145, 33%);
+}
+
+.Navbar img {
+    left: 0%;
+ 
+  
+    width: 50%;
+    
+}
