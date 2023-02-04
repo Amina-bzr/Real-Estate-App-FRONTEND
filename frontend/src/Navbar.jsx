@@ -30,7 +30,7 @@ function Navbar (props){
       let url='https://annoncesimmobilieres.pythonanywhere.com/users/?email='+props.data[0];
        axios.get(url)
       .then(function (response) {
-       console.log(response.data);
+       
        setuserinfo(response.data);
        setavat(response.data[0].contact.picture);
   })

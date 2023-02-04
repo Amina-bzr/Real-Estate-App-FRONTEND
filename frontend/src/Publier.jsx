@@ -41,8 +41,7 @@ function Publier(){
         onSubmit: (values) => {
             
             console.log("form submitted");
-            console.log(values);
-            console.log(data[1]);
+           
             fetch('https://annoncesimmobilieres.pythonanywhere.com/annonces/', {
               method: 'POST',
               headers: {
@@ -58,6 +57,8 @@ function Publier(){
               .catch(error => {
                 console.error(error);
               });
+              ////////Upload photos des annonces //////////
+
               
           
           

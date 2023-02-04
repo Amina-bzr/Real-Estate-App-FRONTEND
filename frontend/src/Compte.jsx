@@ -30,15 +30,9 @@ function Compte(){
         onSubmit: (values) => {
             
             console.log("form submitted");
-           console.log(values);
-           console.log(token);
-           console.log(profile[0].contact.id);
-           let formdata=new FormData();
-           formdata.append("utilisateur",profile[0].contact.id);
-           formdata.append("picture",pic);
-          
+        
            let url='https://annoncesimmobilieres.pythonanywhere.com/users/'+profile[0].id;
-         /* fetch(url, {
+          fetch(url, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -49,28 +43,39 @@ function Compte(){
             .then(response => response.json())
             .then(result => {
               console.log(result);
-             // window.location.reload();
+            
             })
             .catch(error => {
               console.error(error);
-            });*/
+            });
             ////////////////////////////////////////////////////
-            let api='https://annoncesimmobilieres.pythonanywhere.com/contacts/'+profile[0].contact.id+'/';
-           fetch(api, {
-              method: 'PUT',
-              headers: {
-                 Authorization: `Token ${token}`,
-              },
-                       body:JSON.stringify(pic),
-            })
-              .then(response => response)
-              .then(result => {
-                console.log(result);
-               // window.location.reload();
-              })
-              .catch(error => {
-                console.error(error);
-              });
+           if (pic!== undefined){
+            let api='https://annoncesimmobilieres.pythonanywhere.com/contacts/'+profile[0].contact.id;
+            const obj={ picture:pic };
+            const getFormData = obj => Object.keys(obj).reduce((formData, key) => {
+             formData.append(key, obj[key]);
+             return formData;
+             }, new FormData());
+          const final=getFormData(obj);
+
+          fetch(api, {
+             method: 'PUT',
+             headers: {
+
+                Authorization: `Token ${token}`,
+             },
+             body: final,
+           })
+             .then(response => response.json())
+             .then(result => {
+               console.log(result);
+               window.location.reload();
+             })
+             .catch(error => {
+               console.error(error);
+             });
+           }
+            
               
           },
           enableReinitialze: true,

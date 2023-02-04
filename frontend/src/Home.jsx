@@ -10,17 +10,75 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Nav from './Navbar';
 
 function Home (){
+  const [tablewilaya,settablewilaya]=useState([]);
+  const [tablecommune,settablecommune]=useState([]);
+  const [tabletype,settabletype]=useState([]);
+  const [tabledate,settabledate]=useState([]);
+
+
    const [anonces,setanonces]=useState([]);
    const[searchkey,setsearchkey]=useState("");
-  
    const [wilayafiltre,setwilaya]=useState("");
    const [communefiltre,setcommune]=useState("");
    const [typefiltre,settype]=useState("");
    const[date1,setdate1]=useState("");
    const[date2,setdate2]=useState("");
    const[data,setdata]=useState([]);
+   const[changed,setchanged]=useState(false);
     let navigate = useNavigate(); 
     const location=useLocation();
+    function intersection(array,witch){
+      if(witch==="wilaya"){
+        const intersection1 = array.filter(object1 =>
+          tablecommune.some(object2 => object1.id === object2.id)
+        );
+        const intersection2 = intersection1.filter(object1 =>
+          tabledate.some(object2 => object1.id === object2.id)
+        );
+        const intersection3 = intersection2.filter(object1 =>
+          tabletype.some(object2 => object1.id === object2.id)
+        );
+        setanonces(intersection3);
+      }
+      if(witch==="type"){
+        const intersection1 = array.filter(object1 =>
+          tablecommune.some(object2 => object1.id === object2.id)
+        );
+        const intersection2 = intersection1.filter(object1 =>
+          tabledate.some(object2 => object1.id === object2.id)
+        );
+        const intersection3 = intersection2.filter(object1 =>
+          tablewilaya.some(object2 => object1.id === object2.id)
+        );
+        setanonces(intersection3);
+      }
+      if(witch==="date"){
+        const intersection1 = array.filter(object1 =>
+          tablecommune.some(object2 => object1.id === object2.id)
+        );
+        const intersection2 = intersection1.filter(object1 =>
+          tablewilaya.some(object2 => object1.id === object2.id)
+        );
+        const intersection3 = intersection2.filter(object1 =>
+          tabletype.some(object2 => object1.id === object2.id)
+        );
+        setanonces(intersection3);
+      }
+      if(witch==="commune"){
+        const intersection1 = array.filter(object1 =>
+          tablewilaya.some(object2 => object1.id === object2.id)
+        );
+        const intersection2 = intersection1.filter(object1 =>
+          tabledate.some(object2 => object1.id === object2.id)
+        );
+        const intersection3 = intersection2.filter(object1 =>
+          tabletype.some(object2 => object1.id === object2.id)
+        );
+        setanonces(intersection3);
+      }
+      
+      
+    }
    function  handlekeydown(event){
       if (event.key === 'Enter') {
          // call the function you want to execute here
@@ -48,6 +106,10 @@ function Home (){
        .then(function (response) {
          console.log(response.data);
          setanonces(response.data);
+         settablewilaya(response.data);
+         settablecommune(response.data);
+         settabletype(response.data);
+         settabledate(response.data);
          console.log(response.data[1].photos[0].photo);
        })
        .catch(function (error) {
@@ -64,20 +126,26 @@ function Home (){
         axios.get(url)
         .then(function (response) {
           console.log(response.data);
-          setanonces(response.data);
+          settablewilaya(response.data);
+          ///////intersection des 4 tableau 
+          intersection(response.data , "wilaya");
+          
+          
         })
         .catch(function (error) {
           console.log(error);
         });
       }
       else{
+       
         const array=[location.state.useremail,location.state.tok];
      setdata(array);
       axios.get('http://annoncesimmobilieres.pythonanywhere.com/annonces')
        .then(function (response) {
          console.log(response.data);
-         setanonces(response.data);
-         console.log(response.data[1].photos[0].photo);
+         settablewilaya(response.data);
+        ///////intersection des 4 tableau 
+        intersection(response.data ,"wilaya");
        })
        .catch(function (error) {
          console.log(error);
@@ -92,7 +160,8 @@ function Home (){
      axios.get(url)
        .then(function (response) {
          console.log(response.data);
-         setanonces(response.data);
+         settablecommune(response.data);
+         intersection(response.data , "commune");
        })
        .catch(function (error) {
          console.log(error);
@@ -103,31 +172,27 @@ function Home (){
       
       let url="https://annoncesimmobilieres.pythonanywhere.com/annonces/?Type="+typ;
       if(typ !== "none"){
+  
         console.log(typ);
         axios.get(url)
         .then(function (response) {
           console.log(response.data);
-          const intersect = response.data.filter((element) =>
-           anonces.some((item) => JSON.stringify(element) === JSON.stringify(item))
-         );
-
-          setanonces(intersect);
+          settabletype(response.data);
+         intersection(response.data , "type");
         })
         .catch(function (error) {
           console.log(error);
         });
       }
       else{
+      
         const array=[location.state.useremail,location.state.tok];
      setdata(array);
       axios.get('http://annoncesimmobilieres.pythonanywhere.com/annonces')
        .then(function (response) {
-         console.log(response.data);
-         const intersect = response.data.filter((element) =>
-         anonces.some((item) => JSON.stringify(element) === JSON.stringify(item))
-       );
 
-        setanonces(intersect);
+        settabletype(response.data);
+        intersection(response.data , "type");
        })
        .catch(function (error) {
          console.log(error);
@@ -142,14 +207,26 @@ function Home (){
     axios.get(url)
       .then(function (response) {
         console.log(response.data);
-        setanonces(response.data);
+        settabledate(response.data);
+         intersection(response.data , "date");
       })
       .catch(function (error) {
         console.log(error);
       });
    }
+   function verification (valeur){
+    setdate2(valeur);
+    const datemin= new Date(date1);
+    const datemax= new Date(valeur);
+
+  const result = datemin< datemax;
+ if(result === false)
+ {
+  window.alert("veillez inverser l'ordre des dates!");
+ }
+
+   }
    
-    
     return (
    <div className="Home">
     
@@ -237,7 +314,7 @@ function Home (){
     <div className='periode'>
     <div className='Categorie'>
     <input type="date" placeholder='date1' onChange={(e)=>{setdate1(e.target.value)}}/>
-    <input type="date" placeholder='date2' onChange={(e)=>{setdate2(e.target.value)}}/>
+    <input type="date" placeholder='date2' onChange={(e)=>{verification(e.target.value)}}/>
     
     </div>
     <button id='subbutton' onClick={filtreperiode} > submit</button>

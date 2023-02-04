@@ -3,17 +3,22 @@ import './images.css';
 
 const images = ({importimages}) => {
  const [selectedImages, setSelectedImages] = useState([]);
-
+ const [filesarray,setfilesarray]=useState([]);
   const onSelectFile = (event) => {
     const selectedFiles = event.target.files;
     const selectedFilesArray = Array.from(selectedFiles);
 
+    const files=selectedFilesArray.map((file)=>{
+      return(file);
+    })
     const imagesArray = selectedFilesArray.map((file) => {
       return URL.createObjectURL(file);
     });
 
     setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-    importimages(selectedImages);
+    setfilesarray((previousFile)=>previousFile.concat(files));
+    //importimages(selectedImages);
+    
     // FOR BUG IN CHROME
     event.target.value = "";
   };
@@ -54,7 +59,7 @@ const images = ({importimages}) => {
           <button
             className="upload-btn"
             onClick={() => {
-              console.log(selectedImages);
+              importimages(filesarray);
             }}
           >
             UPLOAD {selectedImages.length} IMAGES
