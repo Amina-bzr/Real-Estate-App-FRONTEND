@@ -3,7 +3,7 @@ import { useCallback,useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import titree from './assets/titre.png';
-import modele from './assets/modele.jpg';
+import modele from './assets/Modele.jpg';
 import './Mesannonces.css';
 import axios from 'axios';
 
